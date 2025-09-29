@@ -1,6 +1,24 @@
 let currentQuestion = 1;
 const answers = {};
-const redirectUrl = 'https://ec.haruhure.jp/lp?u=rr_retail_tcb';
+// パス別リダイレクトURL設定
+function getRedirectUrl() {
+    const path = window.location.pathname;
+    const redirectUrls = {
+        '/1': 'https://sf-system.jp/link.php?i=pi4vt1eextt9&m=mi41ruivpeep',
+        '/2': 'https://sf-system.jp/link.php?i=pi4vt1eextt9&m=mi41q1o5alqr',
+        '/3': 'https://sf-system.jp/link.php?i=pi4vt1eextt9&m=mi41q4mbpxi9',
+        '/4': 'https://sf-system.jp/link.php?i=pi4vt1eextt9&m=mi41q3pp22zj',
+        '/5': 'https://sf-system.jp/link.php?i=pi4vt1eextt9&m=mi41q28cb1ef',
+        '/6': 'https://sf-system.jp/link.php?i=pi4vt1eextt9&m=mi41q87mg1d7'
+    };
+
+    const finalUrl = redirectUrls[path] || 'https://ec.haruhure.jp/lp?u=rr_retail_tcb';
+    console.log('Current path:', path);
+    console.log('Redirect URL:', finalUrl);
+
+    // パスに対応するURLがあれば返す、なければデフォルトURL
+    return finalUrl;
+}
 
 // カスタムカーソルの初期化
 function initCursor() {
@@ -240,7 +258,7 @@ function showLoading() {
             setTimeout(() => {
                 fadeOverlay.style.opacity = '1';
                 setTimeout(() => {
-                    window.location.href = redirectUrl;
+                    window.location.href = getRedirectUrl();
                 }, 1000);
             }, 100);
         }, 3000);
@@ -253,6 +271,13 @@ function updateCursorEvents() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // パス別リンク更新
+    const productLink = document.querySelector('.product-link');
+    if (productLink) {
+        productLink.href = getRedirectUrl();
+        console.log('Product link updated to:', productLink.href);
+    }
+
     // カスタムカーソルの初期化
     if (window.matchMedia('(pointer: fine)').matches) {
         initCursor();
