@@ -3,6 +3,8 @@ const answers = {};
 // パス別リダイレクトURL設定
 function getRedirectUrl() {
     const path = window.location.pathname;
+
+    // アンテア・ローラーリッチ用の販売リンク対応マップ
     const redirectUrls = {
         '/1': 'https://sf-system.jp/link.php?i=pi4vt1eextt9&m=mi41ruivpeep',
         '/2': 'https://sf-system.jp/link.php?i=pi4vt1eextt9&m=mi41q1o5alqr',
@@ -13,8 +15,12 @@ function getRedirectUrl() {
     };
 
     const finalUrl = redirectUrls[path] || 'https://ec.haruhure.jp/lp?u=rr_retail_tcb';
-    console.log('Current path:', path);
-    console.log('Redirect URL:', finalUrl);
+
+    // デバッグログ（開発者ツールで確認可能）
+    console.log('=== リダイレクト情報 ===');
+    console.log('現在のパス:', path);
+    console.log('遷移先URL:', finalUrl);
+    console.log('=====================');
 
     // パスに対応するURLがあれば返す、なければデフォルトURL
     return finalUrl;
